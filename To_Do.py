@@ -16,10 +16,12 @@ class Menu():
         pass
 
     def print_todo(self):
+        print("To do:")
         for number, task in enumerate(To_Do_List,start=1):
             print(f"{number} | {task}")
 
     def print_completed(self):
+        print("Completed:")
         for number,task in enumerate(Completed_List,start=1):
             print(f"{number} | {task}")
             
@@ -27,6 +29,7 @@ class Menu():
     def add(add_task):
         add_task = input("What do you need to do?: ")
         To_Do_List.append(add_task)
+        print("")
         Menu.print_todo(self=None)
         
     # Edit task
@@ -42,6 +45,7 @@ class Menu():
             print(To_Do_List[edit_task])
             edit_text = input("New entry: ")
             To_Do_List[edit_task] = edit_text
+            Menu.print_todo
             
     def view(self):
         # Check if the to do list is empty 
@@ -51,18 +55,23 @@ class Menu():
         # Show all items in to do list 
         else:
             Menu.print_todo(self=None)
+            print("")
+            Menu.print_completed(self=None)
 
-    def complete(complete_task):
+    def complete(self):
         # Check if to do list is empty 
         if not To_Do_List:
             print("There is nothing to complete")
         else:
             Menu.print_todo(self=None)
-            complete_task = int(input("What task would you like to complete"))
+            complete_task = int(input("What task would you like to complete: "))
             complete_task -= 1
-            Completed_List.append(To_Do_List[complete_task])
-            print(To_Do_List)
-            print(Completed_List)
+            completed_task = To_Do_List.pop(complete_task)
+            Completed_List.append(completed_task)
+            print("")
+            Menu.print_todo(self=None)
+            print("")
+            Menu.print_completed(self=None)
       
 while True:
     option = input("""
@@ -83,5 +92,7 @@ Choice: """)
     elif option == "3":
         print("")
         Menu.view(self=None)
+    elif option == "4":
+        Menu.complete(self=None)
     elif option == "10":
         break    
